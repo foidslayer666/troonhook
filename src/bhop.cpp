@@ -39,17 +39,11 @@ void bhop() {
         return;
     }
     while (true) {
-        uintptr_t localPlayer = *(uintptr_t*)(base + client_offsets.dwLocalPlayer);
-        if (!localPlayer) {
+        if (isSpacePressed()) {
+            // Trigger jump using the jump offset
+            *(int*)(base + client_offsets.jump) = 5;
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
-            continue;
-        }
-        int flags = *(int*)(localPlayer + client_offsets.m_fFlags);
-        int health = *(int*)(localPlayer + client_offsets.m_iHealth);
-        if (health > 0 && (flags & 1) && isSpacePressed()) { // on ground and space pressed
-            *(int*)(base + client_offsets.dwForceJump) = 5;
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-            *(int*)(base + client_offsets.dwForceJump) = 4;
+            *(int*)(base + client_offsets.jump) = 4;
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
