@@ -35,3 +35,10 @@ echo "Launching CS2 with bhop..."
 # Export LD_PRELOAD and run CS2
 export LD_PRELOAD="$LIBRARY_PATH"
 exec "$CS2_PATH" "$@"
+echo "  CS2: $CS2_PATH"
+echo ""
+echo "Launching CS2 with bhop..."
+
+# Export LD_PRELOAD and run CS2
+export LD_PRELOAD="$LIBRARY_PATH"
+exec "$CS2_PATH" "$@"

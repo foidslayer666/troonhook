@@ -10,7 +10,17 @@ mkdir build && cd build && cmake .. && make
 
 ## Injection
 
-### Method 1: Using the inject script (recommended)
+### Method 1: Steam Launch Options (recommended)
+
+1. In Steam, right-click Counter-Strike 2 > Properties
+2. Go to General > Launch Options
+3. Add: `LD_PRELOAD="/path/to/troonhook/build/libtroonhook.so"`
+4. Replace `/path/to/troonhook` with your actual troonhook directory path
+5. Launch CS2 from Steam
+
+This injects the library into the actual game process.
+
+### Method 2: Using the inject script (advanced)
 
 From the project root directory:
 
@@ -19,14 +29,7 @@ chmod +x inject.sh
 ./inject.sh
 ```
 
-The script handles paths with spaces correctly and automatically finds the compiled library.
-
-### Method 2: Manual LD_PRELOAD
-
-```bash
-export LD_PRELOAD="$(pwd)/build/libtroonhook.so"
-/path/to/cs2.sh
-```
+**Note:** This method may not work due to Steam's runtime environment. Use Method 1 for best results.
 
 ### Method 3: Steam launch options
 

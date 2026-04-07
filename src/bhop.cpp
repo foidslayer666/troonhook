@@ -11,7 +11,7 @@ uintptr_t getBaseAddress(const char* moduleName) {
     std::ifstream maps("/proc/self/maps");
     std::string line;
     while (std::getline(maps, line)) {
-        if (line.find(moduleName) != std::string::npos) {
+        if (line.find(moduleName) != std::string::npos && line.find("r-xp") != std::string::npos) {
             size_t pos = line.find('-');
             if (pos != std::string::npos) {
                 std::string addr = line.substr(0, pos);
@@ -33,9 +33,12 @@ bool isSpacePressed() {
 }
 
 void bhop() {
-    uintptr_t base = getBaseAddress("client_client.so");
+    uintptr_t base = getBaseAddress("libclient.so");
     if (!base) {
-        std::cout << "Failed to find client_client.so base" << std::endl;
+        base = getBaseAddress("client_client.so");
+    }
+    if (!base) {
+        std::cout << "Failed to find client library base" << std::endl;
         return;
     }
     while (true) {
