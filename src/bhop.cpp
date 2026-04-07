@@ -70,7 +70,7 @@ void bhop() {
 }
 
 __attribute__((constructor)) void init() {
-    log_file << "Troonhook library loaded" << std::endl;
+    log_file << "Troonhook library loaded successfully!" << std::endl;
     std::thread t(bhop);
     t.detach();
 }
