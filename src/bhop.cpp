@@ -60,10 +60,10 @@ void bhop() {
     
     while (true) {
         if (isSpacePressed()) {
-            log_file << "Triggering jump" << std::endl;
-            *(int*)(base + client_offsets.jump) = 5;
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-            *(int*)(base + client_offsets.jump) = 4;
+            *(int*)(base + client_offsets.jump) = 5;  // Hold jump
+            log_file << "Jump held" << std::endl;
+        } else {
+            *(int*)(base + client_offsets.jump) = 4;  // Release jump
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
