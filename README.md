@@ -12,6 +12,8 @@ mkdir build && cd build && cmake .. && make
 
 ### Method 1: Using the inject script (recommended)
 
+From the project root directory:
+
 ```bash
 chmod +x inject.sh
 ./inject.sh
