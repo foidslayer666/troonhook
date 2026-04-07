@@ -25,6 +25,7 @@ cp "$LIB_PATH" "$INJECT_PATH"
 chmod 644 "$INJECT_PATH"
 
 # Create GDB script
+rm -f /tmp/inject.gdb
 cat > /tmp/inject.gdb << EOF
 set \$dlopen = (void*(*)(char*, int)) dlopen
 set \$lib = \$dlopen("$INJECT_PATH", 2)

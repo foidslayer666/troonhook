@@ -56,14 +56,22 @@ void bhop() {
     }
     
     log_file << "Using base: 0x" << std::hex << base << std::endl;
-    log_file << "Jump offset: 0x" << std::hex << client_offsets.jump << std::endl;
     
     while (true) {
-        if (isSpacePressed()) {
-            *(int*)(base + client_offsets.jump) = 5;  // Hold jump
-            log_file << "Jump held" << std::endl;
-        } else {
-            *(int*)(base + client_offsets.jump) = 4;  // Release jump
+        uintptr_t localPlayer = *(uintptr_t*)(base + client_offsets.dwLocalPlayer);
+        if (!localPlayer) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            continue;
+        }
+        
+        int flags = *(int*)(localPlayer + client_offsets.m_fFlags);
+        int health = *(int*)(localPlayer + client_offsets.m_iHealth);
+        
+        if (health > 0 && (flags & 1) == 0 && isSpacePressed()) {  // on ground and space pressed
+            *(int*)(base + client_offsets.dwForceJump) = 5;
+            log_file << "Jump triggered" << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            *(int*)(base + client_offsets.dwForceJump) = 4;
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }

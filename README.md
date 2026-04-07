@@ -30,7 +30,7 @@ In Steam launch options: `LD_PRELOAD="/path/to/libtroonhook.so"`
 
 ## Offsets
 
-Static CS2 offsets. Update `scripts/update_offsets.py` and rebuild if offsets change.
+Updated to use standard CS2 offsets (dwForceJump, dwLocalPlayer, etc.) for proper bhop functionality. Offsets may need updating for new game versions.
 
 ## Disclaimer
 
