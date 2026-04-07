@@ -1,6 +1,6 @@
 # troonhook
 
-Internal CS2 bhop hack for Linux.
+Internal for linux
 
 ## Building
 
